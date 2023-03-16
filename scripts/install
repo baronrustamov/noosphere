@@ -23,7 +23,7 @@ INSTALL_DOCKER_COMPOSE="true"
 INSTALL_START_SCRIPT="true"
 INSTALL_UMBREL="true"
 UMBREL_VERSION="master"
-UMBREL_REPO="umbrel/umbrel"
+UMBREL_REPO="getumbrel/umbrel"
 UMBREL_INSTALL_PATH="$HOME/umbrel"
 
 # Parse arguments
