@@ -156,80 +156,24 @@ install_docker_compose() {
   sudo python3 -m pip install docker-compose
 }
 
-install_umbrel() {
-  sudo apt update
-  sudo apt -y install quilt qemu-user-static debootstrap libarchive-tools jq bsdtar
-  sudo rm -rf /etc/docker/daemon.json
-  echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
-  sudo systemctl restart docker
-  git clone https://github.com/baronrustamov/umbrel-os.git
-  UMBREL_OS_VERSION="dev"
-  IMAGE_NAME="umbrel-os-dev"
-  UMBREL_REPO="https://github.com/baronrustamov/umbrel.git"
-  UMBREL_BRANCH="master"
-  cd umbrel-os
-  echo "Building $IMAGE_NAME"
-  sudo IMG_FILENAME=$IMAGE_NAME ZIP_FILENAME=$IMAGE_NAME UMBREL_OS_VERSION=$UMBREL_OS_VERSION UMBREL_REPO=$UMBREL_REPO UMBREL_BRANCH=$UMBREL_BRANCH ./build.sh
-  cd deploy
-  bsdtar xvf --strip-components=1 -C "${UMBREL_INSTALL_PATH}" -f "${IMAGE_NAME}.zip"
-  cd ..
-  cd ..
-  sudo rm -rf umbrel-os
-  sudo apt update
-  sudo apt -y install quilt qemu-user-static debootstrap libarchive-tools jq bsdtar
-  sudo rm -rf /etc/docker/daemon.json
-  echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
-  sudo systemctl restart docker
-  git clone https://github.com/baronrustamov/umbrel-os.git
-  UMBREL_OS_VERSION="dev"
-  IMAGE_NAME="umbrel-os-dev"
-  UMBREL_REPO="https://github.com/baronrustamov/umbrel.git"
-  UMBREL_BRANCH="master"
-  cd umbrel-os
-  echo "Building $IMAGE_NAME"
-  sudo IMG_FILENAME=$IMAGE_NAME ZIP_FILENAME=$IMAGE_NAME UMBREL_OS_VERSION=$UMBREL_OS_VERSION UMBREL_REPO=$UMBREL_REPO UMBREL_BRANCH=$UMBREL_BRANCH ./build.sh
-  cd deploy
-  bsdtar xvf --strip-components=1 -C "${UMBREL_INSTALL_PATH}" -f "${IMAGE_NAME}.zip"
-  cd ..
-  cd ..
-  sudo rm -rf umbrel-os
-    sudo apt update
-  sudo apt -y install quilt qemu-user-static debootstrap libarchive-tools jq bsdtar
-  sudo rm -rf /etc/docker/daemon.json
-  echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
-  sudo systemctl restart docker
-  git clone https://github.com/baronrustamov/umbrel-os.git
-  UMBREL_OS_VERSION="dev"
-  IMAGE_NAME="umbrel-os-dev"
-  UMBREL_REPO="https://github.com/baronrustamov/umbrel.git"
-  UMBREL_BRANCH="master"
-  cd umbrel-os
-  echo "Building $IMAGE_NAME"
-  sudo IMG_FILENAME=$IMAGE_NAME ZIP_FILENAME=$IMAGE_NAME UMBREL_OS_VERSION=$UMBREL_OS_VERSION UMBREL_REPO=$UMBREL_REPO UMBREL_BRANCH=$UMBREL_BRANCH ./build.sh
-  cd deploy
-  bsdtar xvf --strip-components=1 -C "${UMBREL_INSTALL_PATH}" -f "${IMAGE_NAME}.zip"
-  cd ..
-  cd ..
-  sudo rm -rf umbrel-os
-    sudo apt update
-  sudo apt -y install quilt qemu-user-static debootstrap libarchive-tools jq bsdtar
-  sudo rm -rf /etc/docker/daemon.json
-  echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
-  sudo systemctl restart docker
-  git clone https://github.com/baronrustamov/umbrel-os.git
-  UMBREL_OS_VERSION="dev"
-  IMAGE_NAME="umbrel-os-dev"
-  UMBREL_REPO="https://github.com/baronrustamov/umbrel.git"
-  UMBREL_BRANCH="master"
-  cd umbrel-os
-  echo "Building $IMAGE_NAME"
-  sudo IMG_FILENAME=$IMAGE_NAME ZIP_FILENAME=$IMAGE_NAME UMBREL_OS_VERSION=$UMBREL_OS_VERSION UMBREL_REPO=$UMBREL_REPO UMBREL_BRANCH=$UMBREL_BRANCH ./build.sh
-  cd deploy
-  bsdtar xvf --strip-components=1 -C "${UMBREL_INSTALL_PATH}" -f "${IMAGE_NAME}.zip"
-  cd ..
-  cd ..
-  sudo rm -rf umbrel-os
-}
+# sudo apt update
+# sudo apt -y install quilt qemu-user-static debootstrap libarchive-tools jq libarchive-tools zip
+# sudo rm -rf /etc/docker/daemon.json
+# echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
+# sudo systemctl restart docker
+# git clone https://github.com/baronrustamov/umbrel-os.git
+# UMBREL_OS_VERSION="dev"
+# IMAGE_NAME="umbrel-os-dev"
+# UMBREL_REPO="https://github.com/baronrustamov/noosphere .git"
+# UMBREL_BRANCH="master"
+# cd umbrel-os
+# echo "Building $IMAGE_NAME"
+# sudo IMG_FILENAME=$IMAGE_NAME ZIP_FILENAME=$IMAGE_NAME UMBREL_OS_VERSION=$UMBREL_OS_VERSION UMBREL_REPO=$UMBREL_REPO UMBREL_BRANCH=$UMBREL_BRANCH ./build.sh
+# cd deploy
+# bsdtar xvf --strip-components=1 -C "${UMBREL_INSTALL_PATH}" -f "${IMAGE_NAME}.zip"
+# cd ..
+# cd ..
+# sudo rm -rf umbrel-os
 
 install_systemd_service() {
 echo "
