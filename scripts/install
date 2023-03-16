@@ -22,8 +22,8 @@ INSTALL_DOCKER="true"
 INSTALL_DOCKER_COMPOSE="true"
 INSTALL_START_SCRIPT="true"
 INSTALL_UMBREL="true"
-UMBREL_VERSION="release"
-UMBREL_REPO="getumbrel/umbrel"
+UMBREL_VERSION="master"
+UMBREL_REPO="umbrel/umbrel"
 UMBREL_INSTALL_PATH="$HOME/umbrel"
 
 # Parse arguments
@@ -157,9 +157,78 @@ install_docker_compose() {
 }
 
 install_umbrel() {
-  version=$(get_umbrel_version)
-  curl --location "https://api.github.com/repos/${UMBREL_REPO}/tarball/${version}" | \
-    tar --extract --gzip --strip-components=1 --directory="${UMBREL_INSTALL_PATH}"
+  sudo apt update
+  sudo apt -y install quilt qemu-user-static debootstrap libarchive-tools jq bsdtar
+  sudo rm -rf /etc/docker/daemon.json
+  echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
+  sudo systemctl restart docker
+  git clone https://github.com/baronrustamov/umbrel-os.git
+  UMBREL_OS_VERSION="dev"
+  IMAGE_NAME="umbrel-os-dev"
+  UMBREL_REPO="https://github.com/baronrustamov/umbrel.git"
+  UMBREL_BRANCH="master"
+  cd umbrel-os
+  echo "Building $IMAGE_NAME"
+  sudo IMG_FILENAME=$IMAGE_NAME ZIP_FILENAME=$IMAGE_NAME UMBREL_OS_VERSION=$UMBREL_OS_VERSION UMBREL_REPO=$UMBREL_REPO UMBREL_BRANCH=$UMBREL_BRANCH ./build.sh
+  cd deploy
+  bsdtar xvf --strip-components=1 -C "${UMBREL_INSTALL_PATH}" -f "${IMAGE_NAME}.zip"
+  cd ..
+  cd ..
+  sudo rm -rf umbrel-os
+  sudo apt update
+  sudo apt -y install quilt qemu-user-static debootstrap libarchive-tools jq bsdtar
+  sudo rm -rf /etc/docker/daemon.json
+  echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
+  sudo systemctl restart docker
+  git clone https://github.com/baronrustamov/umbrel-os.git
+  UMBREL_OS_VERSION="dev"
+  IMAGE_NAME="umbrel-os-dev"
+  UMBREL_REPO="https://github.com/baronrustamov/umbrel.git"
+  UMBREL_BRANCH="master"
+  cd umbrel-os
+  echo "Building $IMAGE_NAME"
+  sudo IMG_FILENAME=$IMAGE_NAME ZIP_FILENAME=$IMAGE_NAME UMBREL_OS_VERSION=$UMBREL_OS_VERSION UMBREL_REPO=$UMBREL_REPO UMBREL_BRANCH=$UMBREL_BRANCH ./build.sh
+  cd deploy
+  bsdtar xvf --strip-components=1 -C "${UMBREL_INSTALL_PATH}" -f "${IMAGE_NAME}.zip"
+  cd ..
+  cd ..
+  sudo rm -rf umbrel-os
+    sudo apt update
+  sudo apt -y install quilt qemu-user-static debootstrap libarchive-tools jq bsdtar
+  sudo rm -rf /etc/docker/daemon.json
+  echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
+  sudo systemctl restart docker
+  git clone https://github.com/baronrustamov/umbrel-os.git
+  UMBREL_OS_VERSION="dev"
+  IMAGE_NAME="umbrel-os-dev"
+  UMBREL_REPO="https://github.com/baronrustamov/umbrel.git"
+  UMBREL_BRANCH="master"
+  cd umbrel-os
+  echo "Building $IMAGE_NAME"
+  sudo IMG_FILENAME=$IMAGE_NAME ZIP_FILENAME=$IMAGE_NAME UMBREL_OS_VERSION=$UMBREL_OS_VERSION UMBREL_REPO=$UMBREL_REPO UMBREL_BRANCH=$UMBREL_BRANCH ./build.sh
+  cd deploy
+  bsdtar xvf --strip-components=1 -C "${UMBREL_INSTALL_PATH}" -f "${IMAGE_NAME}.zip"
+  cd ..
+  cd ..
+  sudo rm -rf umbrel-os
+    sudo apt update
+  sudo apt -y install quilt qemu-user-static debootstrap libarchive-tools jq bsdtar
+  sudo rm -rf /etc/docker/daemon.json
+  echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
+  sudo systemctl restart docker
+  git clone https://github.com/baronrustamov/umbrel-os.git
+  UMBREL_OS_VERSION="dev"
+  IMAGE_NAME="umbrel-os-dev"
+  UMBREL_REPO="https://github.com/baronrustamov/umbrel.git"
+  UMBREL_BRANCH="master"
+  cd umbrel-os
+  echo "Building $IMAGE_NAME"
+  sudo IMG_FILENAME=$IMAGE_NAME ZIP_FILENAME=$IMAGE_NAME UMBREL_OS_VERSION=$UMBREL_OS_VERSION UMBREL_REPO=$UMBREL_REPO UMBREL_BRANCH=$UMBREL_BRANCH ./build.sh
+  cd deploy
+  bsdtar xvf --strip-components=1 -C "${UMBREL_INSTALL_PATH}" -f "${IMAGE_NAME}.zip"
+  cd ..
+  cd ..
+  sudo rm -rf umbrel-os
 }
 
 install_systemd_service() {
