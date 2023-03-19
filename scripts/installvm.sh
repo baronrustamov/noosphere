@@ -8,7 +8,7 @@ mkdir -p "${needrestart_conf_dir}"
 echo "# Restart services (l)ist only, (i)nteractive or (a)utomatically.
 \$nrconf{restart} = 'l';
 # Disable hints on pending kernel upgrades.
-\$nrconf{kernelhints} = 0; " | sudo tee "${needrestart_conf_file}" > /dev/null
+\$nrconf{kernelhints} = 0; " | tee "${needrestart_conf_file}" > /dev/null
 trap "rm -f ${needrestart_conf_file}" EXIT
 
 # Default options
