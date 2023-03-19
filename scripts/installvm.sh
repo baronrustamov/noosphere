@@ -146,7 +146,7 @@ install_yq() {
 
 install_docker() {
   # Install Docker
-   curl -fsSL https://get.docker.com | sudo sh
+   curl -fsSL https://get.docker.com | sh
 }
 
 install_docker_compose() {
@@ -156,11 +156,11 @@ install_docker_compose() {
   python3 -m pip install docker-compose
 }
 
-# sudo apt update
-# sudo apt -y install quilt qemu-user-static debootstrap libarchive-tools jq libarchive-tools zip
-# sudo rm -rf /etc/docker/daemon.json
-# echo '{"experimental": true}' | sudo tee -a /etc/docker/daemon.json
-# sudo systemctl restart docker
+# apt update
+# apt -y install quilt qemu-user-static debootstrap libarchive-tools jq libarchive-tools zip
+# rm -rf /etc/docker/daemon.json
+# echo '{"experimental": true}' | tee -a /etc/docker/daemon.json
+# systemctl restart docker
 # git clone https://github.com/baronrustamov/umbrel-os.git
 # UMBREL_OS_VERSION="dev"
 # IMAGE_NAME="umbrel-os-dev"
@@ -168,12 +168,12 @@ install_docker_compose() {
 # UMBREL_BRANCH="master"
 # cd umbrel-os
 # echo "Building $IMAGE_NAME"
-# sudo IMG_FILENAME=$IMAGE_NAME ZIP_FILENAME=$IMAGE_NAME UMBREL_OS_VERSION=$UMBREL_OS_VERSION UMBREL_REPO=$UMBREL_REPO UMBREL_BRANCH=$UMBREL_BRANCH ./build.sh
+# IMG_FILENAME=$IMAGE_NAME ZIP_FILENAME=$IMAGE_NAME UMBREL_OS_VERSION=$UMBREL_OS_VERSION UMBREL_REPO=$UMBREL_REPO UMBREL_BRANCH=$UMBREL_BRANCH ./build.sh
 # cd deploy
 # bsdtar xvf --strip-components=1 -C "${UMBREL_INSTALL_PATH}" -f "${IMAGE_NAME}.zip"
 # cd ..
 # cd ..
-# sudo rm -rf umbrel-os
+# rm -rf umbrel-os
 
 install_systemd_service() {
 echo "
@@ -203,7 +203,7 @@ Restart=always
 RestartSec=10
 
 [Install]
-WantedBy=multi-user.target" | sudo tee "/etc/systemd/system/umbrel-startup.service"
+WantedBy=multi-user.target" | tee "/etc/systemd/system/umbrel-startup.service"
   chmod 644 "/etc/systemd/system/umbrel-startup.service"
   systemctl enable "umbrel-startup.service"
 }
